@@ -1,6 +1,7 @@
 from flask import Flask
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 from app.routes.hiring_manager_routes import hiring_managers_bp
 from app.routes.job_seeker_routes import job_seekers_bp
 from app.routes.job_posting_routes import job_postings_bp
@@ -18,6 +19,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
+
+    # Enableed CORS for all routes
+    CORS(app)
 
     with app.app_context():
         db.create_all()
