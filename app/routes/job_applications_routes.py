@@ -41,7 +41,7 @@ def get_application_details(application_id):
         return jsonify({'error': 'Application not found'}), 404
 
 # Update details of a specific application by ID
-@job_applications_bp.route('/<int:application_id>', methods=['PUT'])
+@job_applications_bp.route('/<int:application_id>', methods=['PATCH'])
 def update_application(application_id):
     try:
         application = Application.query.get_or_404(application_id)

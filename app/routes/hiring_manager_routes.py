@@ -39,7 +39,7 @@ def create_hiring_manager():
         return jsonify({'error': str(e)}), 500
 
 # Update an existing hiring manager
-@hiring_managers_bp.route('/<int:id>', methods=['PUT'])
+@hiring_managers_bp.route('/<int:id>', methods=['PATCH'])
 def update_hiring_manager(id):
     try:
         hiring_manager = HiringManager.query.get_or_404(id)

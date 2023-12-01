@@ -41,7 +41,7 @@ def get_skill_set_details(skill_set_id):
         return jsonify({'error': 'Skill set not found'}), 404
 
 # Update details of a specific skill set by ID
-@skill_sets_bp.route('/<int:skill_set_id>', methods=['PUT'])
+@skill_sets_bp.route('/<int:skill_set_id>', methods=['PATCH'])
 def update_skill_set(skill_set_id):
     try:
         skill_set = SkillSet.query.get_or_404(skill_set_id)

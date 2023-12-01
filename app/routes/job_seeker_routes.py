@@ -39,7 +39,7 @@ def create_job_seeker():
         return jsonify({'error': str(e)}), 500
 
 # Update an existing job seeker profile
-@job_seekers_bp.route('/<int:id>', methods=['PUT'])
+@job_seekers_bp.route('/<int:id>', methods=['PATCH'])
 def update_job_seeker(id):
     try:
         job_seeker = JobSeeker.query.get_or_404(id)
