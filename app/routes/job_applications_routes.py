@@ -14,7 +14,7 @@ def create_application(job_posting_id):
             return jsonify({'error': 'Empty request data'}), 400
 
         new_application = Application(**data)
-        new_application.job_posting = job_posting  # Associate the application with the job posting
+        new_application.job_posting = job_posting
         db.session.add(new_application)
         db.session.commit()
         return jsonify(new_application.serialize()), 201
