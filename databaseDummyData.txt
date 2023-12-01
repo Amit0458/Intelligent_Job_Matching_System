@@ -1,0 +1,88 @@
+--Dummy Data to insert in the tables in MySql Database!
+-- HiringManager Table
+INSERT INTO hiring_manager (name, email, phone_number, department) VALUES
+('John Doe', 'john@example.com', '1234567890', 'Sales'),
+('Alice Smith', 'alice@example.com', '9876543210', 'Marketing'),
+('Bob Johnson', 'bob@example.com', '1112223333', 'HR'),
+('Emily Davis', 'emily@example.com', '4445556666', 'Finance'),
+('Michael Wilson', 'michael@example.com', '7778889999', 'IT'),
+('Sophia Brown', 'sophia@example.com', '2223334444', 'Operations'),
+('Daniel Martinez', 'daniel@example.com', '8889990000', 'Sales'),
+('Olivia Taylor', 'olivia@example.com', '3334445555', 'Marketing'),
+('William Anderson', 'william@example.com', '9990001111', 'HR'),
+('Ava Garcia', 'ava@example.com', '5556667777', 'Finance');
+
+-- JobSeeker Table
+INSERT INTO job_seeker (name, status, skills, experience, bio, availability) VALUES
+('Jennifer Smith', 1, 'Python, JavaScript', '5 years', 'Experienced software developer', '2023-12-01'),
+('David Brown', 1, 'Java, SQL', '3 years', 'Skilled backend developer', '2023-12-05'),
+('Sarah Johnson', 1, 'HTML, CSS', '2 years', 'Frontend developer with UI/UX focus', '2023-12-07'),
+('Robert White', 0, 'Python, Django', '4 years', 'Full-stack developer with Django expertise', '2023-12-10'),
+('Emily Green', 1, 'JavaScript, React', '3 years', 'Frontend developer specializing in React', '2023-12-15'),
+('Michael Thompson', 1, 'C++, Python', '4 years', 'Software engineer experienced in C++ development', '2023-12-20'),
+('Sophie Harris', 0, 'Java, Spring', '2 years', 'Backend developer skilled in Spring framework', '2023-12-25'),
+('Oliver Martinez', 1, 'JavaScript, Node.js', '3 years', 'Node.js developer', '2023-12-28'),
+('William Clark', 1, 'Python, Flask', '2 years', 'Web developer using Flask', '2023-12-31'),
+('Isabella Rodriguez', 0, 'Ruby, Ruby on Rails', '3 years', 'Ruby on Rails developer', '2024-01-05');
+
+-- SkillSet Table
+INSERT INTO skillset (name) VALUES
+('Python'),
+('JavaScript'),
+('Java'),
+('SQL'),
+('HTML'),
+('CSS'),
+('Django'),
+('React'),
+('C++'),
+('Node.js');
+
+-- JobPosting Table
+INSERT INTO jobposting (job_title, status, start_date, end_date, hiring_manager_id) VALUES
+('Software Engineer', 'Active', '2023-12-01', '2023-12-31', 1),
+('Backend Developer', 'Active', '2023-12-05', '2023-12-30', 2),
+('Frontend Developer', 'Active', '2023-12-07', '2023-12-28', 3),
+('Full-stack Developer', 'Closed', '2023-12-10', '2023-12-25', 4),
+('React Developer', 'Active', '2023-12-15', '2023-12-20', 5),
+('Software Engineer', 'Active', '2023-12-20', '2023-12-31', 6),
+('Backend Developer', 'Closed', '2023-12-25', '2023-12-28', 7),
+('Node.js Developer', 'Active', '2023-12-28', '2024-01-10', 8),
+('Web Developer', 'Active', '2023-12-31', '2024-01-05', 9),
+('Ruby on Rails Developer', 'Closed', '2024-01-05', '2024-01-15', 10);
+
+-- Application Table
+INSERT INTO application (job_posting_id, status, job_seeker_id) VALUES
+(1, 'Applied', 1),
+(2, 'Applied', 2),
+(3, 'Rejected', 3),
+(4, 'Applied', 4),
+(5, 'Pending', 5),
+(6, 'Applied', 6),
+(7, 'Rejected', 7),
+(8, 'Pending', 8),
+(9, 'Applied', 9),
+(10, 'Rejected', 10);
+
+-- SkillSetJobPosting Table (Associating SkillSets with JobPostings)
+INSERT INTO skillset_jobposting (skillset_id, jobposting_id) VALUES
+(1, 1),
+(2, 1),
+(3, 2),
+(4, 2),
+(5, 3),
+(6, 3),
+(7, 4),
+(1, 4),
+(8, 5),
+(2, 5),
+(9, 6),
+(1, 6),
+(3, 7),
+(10, 7),
+(2, 8),
+(8, 8),
+(9, 9),
+(1, 9),
+(10, 10),
+(4, 10);
