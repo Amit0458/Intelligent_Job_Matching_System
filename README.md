@@ -39,6 +39,7 @@ Make sure you have Python installed. If not, download and install it from [pytho
     ```plaintext
     DB_USERNAME=your_database_username
     DB_PASSWORD=your_database_password
+    DB_DATABASENAME=your_database_name
     ```
 
 2. Run the application:
