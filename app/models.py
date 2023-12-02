@@ -69,7 +69,7 @@ class JobPosting(db.Model):
     
     # many-to-many relationship with SkillSet
     skillsets = db.relationship('SkillSet', secondary='skillset_jobposting', backref='job_postings')
-    
+
     # one-to-many relationship with Application
     applications = db.relationship('Application', backref='job_posting', lazy=True)
 
@@ -77,16 +77,21 @@ class JobPosting(db.Model):
         return f'<JobPosting {self.job_title}>'
 
     def serialize(self):
+        print("Associated Skill Sets:", self.associated_skillsets)
+        hiring_manager_data = self.hiring_manager.serialize() if self.hiring_manager else None
+        skillsets_data = [skillset.serialize() for skillset in self.associated_skillsets]
+        applications_data = [application.serialize() for application in self.applications]
+
         return {
             'id': self.id,
             'job_title': self.job_title,
-            'status' : self.status,
-            'start_date' : self.start_date,
-            'end_date' : self.end_date,
-            'hiring_manager': self.hiring_manager.serialize() if self.hiring_manager else None,
-            'skillsets': [skillset.serialize() for skillset in self.skillsets],
-            'applications': [application.serialize() for application in self.applications]
-        }    
+            'status': self.status,
+            'start_date': str(self.start_date),
+            'end_date': str(self.end_date),
+            'hiring_manager': hiring_manager_data,
+            'skillsets': skillsets_data,
+            'applications': applications_data
+        }
 
 class SkillSet(db.Model):
     __tablename__ = 'skillset'
@@ -118,14 +123,19 @@ class Application(db.Model):
 
     def __repr__(self):
         return f'<Application {self.id}>'
-    
+
     def serialize(self):
+        job_posting_details = JobPosting.query.get(self.job_posting_id)
+        job_posting_title = job_posting_details.job_title if job_posting_details else None
+
         return {
             'id': self.id,
             'job_posting_id': self.job_posting_id,
+            'job_posting_title': job_posting_title,
             'status': self.status,
-            'job_seeker_id': self.job_seeker_id
+            'job_seeker': self.job_seeker.serialize() if self.job_seeker else None
         }
+
 
 
     

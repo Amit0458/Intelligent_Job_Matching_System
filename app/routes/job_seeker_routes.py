@@ -21,18 +21,22 @@ def get_job_seeker(id):
     except Exception as e:
         return jsonify({'error': 'Job seeker not found'}), 404
 
-# Create a new job seeker profile
-@job_seekers_bp.route('/', methods=['POST'])
-def create_job_seeker():
+# Create a new job seeker profile or multiple job seekers
+@job_seekers_bp.route('/bulk', methods=['POST'])
+def create_job_seekers():
     try:
         data = request.json
         if not data:
             return jsonify({'error': 'Empty request data'}), 400
 
-        new_job_seeker = JobSeeker(**data)
-        db.session.add(new_job_seeker)
+        new_job_seekers = []
+        for job_seeker_data in data:
+            new_job_seeker = JobSeeker(**job_seeker_data)
+            new_job_seekers.append(new_job_seeker)
+
+        db.session.add_all(new_job_seekers)
         db.session.commit()
-        return jsonify(new_job_seeker.serialize()), 201
+        return jsonify([job_seeker.serialize() for job_seeker in new_job_seekers]), 201
     except KeyError as e:
         return jsonify({'error': 'Missing key in JSON data'}), 400
     except Exception as e:

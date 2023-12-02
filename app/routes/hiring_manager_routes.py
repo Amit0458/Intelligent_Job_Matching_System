@@ -21,18 +21,22 @@ def get_hiring_manager(id):
     except Exception as e:
         return jsonify({'error': 'Hiring manager not found'}), 404
 
-# Create a new hiring manager
+# Create new hiring manager or managers
 @hiring_managers_bp.route('/', methods=['POST'])
-def create_hiring_manager():
+def create_hiring_managers():
     try:
         data = request.json
         if not data:
             return jsonify({'error': 'Empty request data'}), 400
 
-        new_hiring_manager = HiringManager(**data)
-        db.session.add(new_hiring_manager)
+        new_hiring_managers = []
+        for hiring_manager_data in data:
+            new_hiring_manager = HiringManager(**hiring_manager_data)
+            new_hiring_managers.append(new_hiring_manager)
+
+        db.session.add_all(new_hiring_managers)
         db.session.commit()
-        return jsonify(new_hiring_manager.serialize()), 201
+        return jsonify([hiring_manager.serialize() for hiring_manager in new_hiring_managers]), 201
     except KeyError as e:
         return jsonify({'error': 'Missing key in JSON data'}), 400
     except Exception as e:
