@@ -154,7 +154,7 @@ Make sure you have Python installed. If not, download and install it from [pytho
 
 ### Backend
 
-- **Python**: Backend language
+- **Python 3**: Programming language used for the backend.
 - **Flask**: Web framework
 - **SQLAlchemy**: ORM for database interaction
 
@@ -171,13 +171,11 @@ The project currently focuses on backend functionality and a frontend component 
 
 ### Other Tools/Libraries
 
-- **Flask**: Web framework for building the backend.
-- **SQLAlchemy**: SQL toolkit and Object-Relational Mapping (ORM) for working with databases.
 - **MySQL**: Database used to store application data.
 - **Flask-SQLAlchemy**: Flask extension that simplifies database integration.
 - **dotenv**: Python library for managing environment variables.
 - **Flask-CORS**: Flask extension for handling Cross-Origin Resource Sharing.
-- **Python 3**: Programming language used for the backend.
+
 
 
 ## Contributing
