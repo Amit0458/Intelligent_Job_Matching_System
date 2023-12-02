@@ -148,7 +148,65 @@ Make sure you have Python installed. If not, download and install it from [pytho
   - Deletes the skill set identified by `skill_set_id`.
   - Returns a success message if the deletion is successful.
 
+### Examples of JSON Objects for Each Table
 
+#### Job Seeker JSON Object:
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone_number": "1234567890",
+  "status": 1,
+  "skills": ["Python", "JavaScript"],
+  "experience": "3 years",
+  "bio": "Experienced software developer",
+  "availability": "2023-12-01"
+}
+```
+#### Hiring Manager JSON Object:
+
+```json
+{
+  "title": "Software Engineer",
+  "description": "Looking for a skilled software engineer...",
+  "location": "Remote",
+  "employment_type": "Full-time",
+  "skills_required": ["Python", "JavaScript"],
+  "posted_by": "John Smith"
+}
+```
+#### Job Posting JSON Object :
+
+```json
+{
+  "title": "Software Engineer",
+  "description": "Looking for a skilled software engineer...",
+  "location": "Remote",
+  "employment_type": "Full-time",
+  "skills_required": ["Python", "JavaScript"],
+  "posted_by": "John Smith"
+}
+
+```
+#### Skill Set JSON Object :
+
+```json
+{
+  "name": "Python Development",
+}
+
+```
+#### Job Application JSON Object :
+
+```json
+{
+  "job_posting_id": 1,
+  "job_seeker_id": 1,
+  "status": "Pending",
+  "application_date": "2023-12-10"
+}
+```
 
 ## Tech Stack
 
