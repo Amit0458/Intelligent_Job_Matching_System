@@ -24,6 +24,8 @@ class HiringManager(db.Model):
 class JobSeeker(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    phone_number = db.Column(db.String(15))
     status = db.Column(db.Boolean)
     skills = db.Column(db.String(255))
     experience = db.Column(db.String(50))
@@ -37,6 +39,8 @@ class JobSeeker(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'email': self.email,
+            'phone_number': self.phone_number,
             'status': self.status,
             'skills': self.skills,
             'experience': self.experience,
@@ -62,9 +66,12 @@ class JobPosting(db.Model):
     # relationship with Hiring Manager
     hiring_manager_id = db.Column(db.Integer, db.ForeignKey('hiring_manager.id'))
     hiring_manager = db.relationship('HiringManager', backref=db.backref('job_postings', lazy=True))
-
+    
     # many-to-many relationship with SkillSet
     skillsets = db.relationship('SkillSet', secondary='skillset_jobposting', backref='job_postings')
+    
+    # one-to-many relationship with Application
+    applications = db.relationship('Application', backref='job_posting', lazy=True)
 
     def __repr__(self):
         return f'<JobPosting {self.job_title}>'
@@ -77,7 +84,8 @@ class JobPosting(db.Model):
             'start_date' : self.start_date,
             'end_date' : self.end_date,
             'hiring_manager': self.hiring_manager.serialize() if self.hiring_manager else None,
-            'skillsets': [skillset.serialize() for skillset in self.skillsets]
+            'skillsets': [skillset.serialize() for skillset in self.skillsets],
+            'applications': [application.serialize() for application in self.applications]
         }    
 
 class SkillSet(db.Model):
@@ -99,10 +107,11 @@ class SkillSet(db.Model):
 
 
 class Application(db.Model):
+    __tablename__ = 'application'
     id = db.Column(db.Integer, primary_key=True)
     job_posting_id = db.Column(db.Integer, db.ForeignKey('jobposting.id'))
     status = db.Column(db.String(50))
-
+    
     # applicant details from JobSeeker
     job_seeker_id = db.Column(db.Integer, db.ForeignKey('job_seeker.id'))
     job_seeker = db.relationship('JobSeeker', backref=db.backref('applications', lazy=True))

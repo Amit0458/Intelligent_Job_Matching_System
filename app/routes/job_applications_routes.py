@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Application, JobPosting
+from app.models import db, Application, JobPosting, JobSeeker
 
 job_applications_bp = Blueprint('applications', __name__, url_prefix='/applications')
 
@@ -31,12 +31,26 @@ def get_applications_for_job_posting(job_posting_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Get details of a specific application by ID
 @job_applications_bp.route('/details/<int:application_id>', methods=['GET'])
 def get_application_details(application_id):
     try:
         application = Application.query.get_or_404(application_id)
-        return jsonify(application.serialize()), 200
+        
+        # Retrieve job posting details
+        # job_posting = JobPosting.query.get(application.job_posting_id)
+        
+        # Retrieve job seeker details
+        job_seeker = JobSeeker.query.get(application.job_seeker_id)
+        
+        if job_seeker:
+            # Return application, job posting, and job seeker details
+            return jsonify({
+                'application_details': application.serialize(),
+                # 'job_posting_details': job_posting.serialize(),
+                'job_seeker_details': job_seeker.serialize()
+            }), 200
+        else:
+            return jsonify({'error': 'Job seeker or job posting details not found'}), 404
     except Exception as e:
         return jsonify({'error': 'Application not found'}), 404
 
