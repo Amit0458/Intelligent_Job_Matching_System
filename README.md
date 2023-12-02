@@ -4,7 +4,7 @@ This project is a Flask-based web application that provides functionality for ma
 
 ## ER Diagram
 
-![ER Diagram](https://github.com/Amit0458/Intelligent_Job_Matching_System/blob/main/IJMS.png)
+![ER Diagram](https://github.com/Amit0458/Intelligent_Job_Matching_System/blob/main/ER_Diagram.png)
 
 ## Installation
 
