@@ -184,7 +184,7 @@ Thank you for considering contributing to our project! As this project is part o
 
 ### How to Contribute
 
-- **Feedback**: If you have any feedback, suggestions, or ideas to improve this project, feel free to create an issue detailing your thoughts. We appreciate all kinds of constructive feedback!
+- **Feedback**: If you have any feedback, suggestions, or ideas to improve this project, feel free to create an issue detailing your thoughts. I appreciate all kinds of constructive feedback!
 
 - **Ideas and Discussions**: Join the conversation by participating in discussions within existing issues. Share your ideas or thoughts on how to enhance the project.
 
